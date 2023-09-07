@@ -13,7 +13,7 @@ from goods.models import Good, Category
 class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    serializer = UserSerializer(queryset, many=True)
+    # serializer = UserSerializer
 class GoodApiView(APIView):
     def get(self, request: Request):
         goods = Good.objects.all()
