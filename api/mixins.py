@@ -1,21 +1,24 @@
-import django.utils
-
 from config import settings
-from django.utils.translation import get_language_from_request, get_language_from_path
+# from django.utils.translation import get_language_from_request
+
 class TranslatedSerializerMixin(object):
     """
     Mixin for selecting only requested translation with django-parler-rest
     """
-
     def to_representation(self, instance):
         inst_rep = super().to_representation(instance)
         request = self.context.get('request')
 
-        try:
-            lang_code = get_language_from_request(request, check_path=True)
-        except:
-            lang_code ='en'
-
+        field = str(request.META['PATH_INFO'])[-3:-1]
+        print(field)
+        for lang, lang_str in settings.LANGUAGES:
+            print(lang)
+            if field == lang:
+                lang_code = field
+                break
+        else:
+            lang_code = 'en'
+            # lang_code = get_language_from_request(request)
 
         result = {}
         for field_name, field in self.get_fields().items():
