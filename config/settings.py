@@ -117,6 +117,17 @@ LANGUAGES = [
     ('ru', ("russian")),
 ]
 
+PARLER_LANGUAGES = {
+    1: (
+        {'code': 'en', },
+        {'code': 'ru',},
+    ),
+    'default': {
+        'fallback': 'ru',             # defaults to PARLER_DEFAULT_LANGUAGE_CODE
+        'hide_untranslated': False,   # the default; let .active_translations()       return fallbacks too.
+    }
+}
+
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
